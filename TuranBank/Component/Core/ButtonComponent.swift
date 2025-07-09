@@ -9,39 +9,35 @@ import SwiftUI
 
 struct ButtonComponent: View {
     
-    var buttonImage: String?
-    var buttonName: String?
+    var icon: String?
+    var name: String?
+    var bgColor: Color?
+    
     var completion: (() -> Void)?
-    
-    init(buttonImage: String? = nil, buttonName: String? = nil, completion: (() -> Void)? = nil) {
-        self.completion = completion
-        self.buttonImage = buttonImage
-        self.buttonName = buttonName
-    }
-    
+ 
     var body: some View {
         
-        HStack {
-            Button {
-                completion?()
-            } label: {
-                if let buttonImage = buttonImage {
-                    Image(systemName: buttonImage)
+        Button {
+            completion?()
+        } label: {
+            
+            HStack {
+                if let icon = icon {
+                    Image(systemName: icon)
                 }
                 
-                if let buttonName = buttonName {
-                    Text(buttonName)
+                if let name = name {
+                    Text(name)
                 }
-            }
-        }.frame(height:56)
-            .frame(maxWidth: .infinity)
-            .foregroundStyle(.white)
-            .background(Color.blue)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-        
+            }.frame(height:56)
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+                .background(bgColor)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
     }
 }
 
 #Preview {
-    ButtonComponent(buttonImage: "person", buttonName: "Sifariş et")
+    ButtonComponent(icon: "person", name: "Sifariş et")
 }
